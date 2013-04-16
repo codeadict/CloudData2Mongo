@@ -38,6 +38,17 @@ class CSClient(object):
             #iterate over each Virtual Machine and push data to mongo DB
             for vm in vms:
                 print vm['name']
+                #Here it inserts all the obtained data into DB
+                #To insert only specific fields u must use like this:
+                #Define a dict with names of fields to remove
+                #list of fields in http://cloudstack.apache.org/docs/api/apidocs-4.0.0/root_admin/listVirtualMachines.html on section
+                #Response Tags
+                #remove_fields = {'account', 'cpunumber', 'cpuspeed'}
+                #want = dict(vm)
+                #for unwanted_key in remove_fields:
+                #    del want[unwanted_key]
+                #inserted_id = self.collection.insert(dict(vm))
+                #Comment next line if you want to put specific fields only
                 inserted_id = self.collection.insert(dict(vm))
                 print 'Inserted record on MongoDB with id %s' % inserted_id
         except URLError:
