@@ -14,18 +14,24 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+import ConfigParser
 import httplib
-
 import pymongo
 
+settings = ConfigParser.ConfigParser()
+settings.read('cloud.conf')
 
 class OpenStack(object):
     '''
     Class to gather data from OpenStack Virtual Machines
     '''
     def collect_data(self):
-        pass
+        params = '{auth{"passwordCredentials":{"username":%s, "password": %s}}}' %(settings.get('MONGODB', 'MONGODB_SERVER'), settings.get('MONGODB', 'MONGODB_SERVER')
+        #dettect if secure connection is used
+        if (settings.getboolean('OPENSTACK', 'HTTPS') == True):
+            conn = httplib.HTTPSConnection(url, key_file='../cert/priv.pem', cert_file='../cert/srv_test.crt')
+        else:
+            conn = httplib.HTTPConnection(url)
 
     def mongo_it(self):
         pass
