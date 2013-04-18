@@ -25,8 +25,8 @@ settings.read('cloud.conf')
 class CSClient(object):
     def init(self):
         #MongoDB connection
-        self.mongo = pymongo.Connection(settings.get('MONGODB', 'MONGODB_SERVER'), settings.get('MONGODB', 'MONGODB_PORT'))
-        self.db = mongo(settings.get('MONGODB', 'MONGODB_DB'))
+        self.mongo = pymongo.Connection(settings.get('MONGODB', 'MONGODB_SERVER'), settings.getint('MONGODB', 'MONGODB_PORT'))
+        self.db = self.mongo(settings.get('MONGODB', 'MONGODB_DB'))
         #collection to store the data
         self.collection = self.db['cloudstack']
 
