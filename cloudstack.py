@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-#
 #!/usr/bin/env python
 # vim: tabstop=4 shiftwidth=4 softtabstop=4
 
@@ -25,8 +26,8 @@ settings.read('cloud.conf')
 class CSClient(object):
     def init(self):
         #MongoDB connection
-        self.mongo = pymongo.Connection(settings.get('MONGODB', 'MONGODB_SERVER'), settings.getint('MONGODB', 'MONGODB_PORT'))
-        self.db = self.mongo(settings.get('MONGODB', 'MONGODB_DB'))
+        self.mongo = pymongo.MongoClient(settings.get('MONGODB', 'MONGODB_SERVER'), settings.getint('MONGODB', 'MONGODB_PORT'))
+        self.db = self.mongo[settings.get('MONGODB', 'MONGODB_DB')]
         #collection to store the data
         self.collection = self.db['cloudstack']
 
